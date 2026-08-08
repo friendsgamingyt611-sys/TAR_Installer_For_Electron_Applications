@@ -1,0 +1,52 @@
+.\" tifea.1 - Man page for TIFEA (TAR Installer For Electron Applications)
+.TH TIFEA 1 "August 2026" "1.0.0" "User Commands"
+.SH NAME
+tifea \- Atomic transactional installer for desktop Electron tarballs
+.SH SYNOPSIS
+.B tifea
+[\fIOPTIONS\fR] \fICOMMAND\fR [\fIARGS\fR...]
+.SH DESCRIPTION
+.B TIFEA
+(TAR Installer For Electron Applications) is an atomic, self-healing, transactional command-line installer designed for prebuilt Linux desktop software packaged as tarballs (.tar.gz, .tar.xz).
+.PP
+TIFEA inspects archives without extracting them, builds deterministic installation plans, executes atomic actions backed by LIFO rollback state, generates Freedesktop-compliant .desktop entries, configures AppArmor/SELinux confinement, extracts bundled application icons (including embedded ASAR resources), and registers xdg-mime URL handlers.
+.SH COMMANDS
+.TP
+\fBinstall\fR \fIARCHIVE\fR [\fI--dry-run\fR] [\fI--yes\fR] [\fI--sandbox STRATEGY\fR]
+Inspects \fIARCHIVE\fR and installs it into system directories (\fI/opt/<appid>\fR). Performs sandbox configuration, icon extraction, desktop entry creation, and SELinux relabeling.
+.TP
+\fBreinstall\fR \fIARCHIVE\fR [\fI--dry-run\fR] [\fI--yes\fR] [\fI--sandbox STRATEGY\fR]
+Replaces an existing installation matching the application ID in \fIARCHIVE\fR while keeping the installation ledger updated.
+.TP
+\fBcheck\fR \fISYSTEM_PATH\fR \fIARCHIVE\fR
+Compares an existing installation directory against an archive. Checks executable symlinks, desktop entries, icon hash integrity, xdg-open handlers, and SELinux path states without mutating system files.
+.TP
+\fBfix\fR \fISYSTEM_PATH\fR \fIARCHIVE\fR [\fI--yes\fR]
+Runs check comparisons and repairs detected fixable discrepancies (such as broken symlinks or missing desktop entries). Prompts for baseline manifest adoption if none exists.
+.TP
+\fBlist\fR
+Displays all installed applications managed by TIFEA.
+.TP
+\fBuninstall\fR \fIAPPID\fR
+Safely removes the application matching \fIAPPID\fR, cleans up menu launchers and icon assets, and restores backups recorded in the installation manifest.
+.SH OPTIONS
+.TP
+.BR \-\-dry\-run
+Preview the generated action plan and target directories without modifying the system.
+.TP
+.BR \-\-yes
+Skip interactive prompts and accept plan confirmations automatically.
+.TP
+.BR \-\-sandbox \ \fISTRATEGY\fR
+Select Electron sandbox strategy: \fBapparmor\fR, \fBsetuid\fR, or \fBno\-sandbox\fR.
+.TP
+.BR \-h ", " \-\-help
+Print usage summary and exit.
+.SH FILES
+.TP
+.I ~/.local/share/tifea/<appid>/manifest.json
+Atomic transactional installation ledger storing step status and rollback metadata.
+.SH AUTHORS
+Written by the TIFEA Development Team.
+.SH COPYRIGHT
+PolyForm Noncommercial License 1.0.0 / MIT.

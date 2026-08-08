@@ -1,0 +1,37 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "tifea"
+version = "1.0.0"
+description = "Atomic transactional installer for desktop tarballs"
+readme = "README.md"
+requires-python = ">=3.8"
+license = {text = "PolyForm-Noncommercial-1.0.0"}
+authors = [
+    {name = "TIFEA Maintainers"}
+]
+keywords = ["installer", "tarball", "electron", "transactional", "atomic", "linux", "packaging"]
+classifiers = [
+    "Development Status :: 5 - Production/Stable",
+    "Environment :: Console",
+    "Intended Audience :: System Administrators",
+    "Operating System :: POSIX :: Linux",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3 :: Only",
+]
+
+[project.scripts]
+tifea = "tifea.cli:main"
+targz-installer = "tifea.cli:main"
+tifiea = "tifea.cli:main"
+
+[project.optional-dependencies]
+test = ["pytest>=8"]
+
+[tool.setuptools.packages.find]
+include = ["tifea*", "targz_installer*"]
+
+[tool.setuptools.package-data]
+"*" = ["data/**/*"]

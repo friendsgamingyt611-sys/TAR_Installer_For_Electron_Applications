@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component type="console-application">
+  <id>org.example.tifea</id>
+  <name>tifea</name>
+  <summary>Atomic transactional installer for prebuilt desktop tarballs</summary>
+  <metadata_license>CC0-1.0</metadata_license>
+  <project_license>PolyForm-Noncommercial-1.0.0</project_license>
+  <developer_name>TIFEA Maintainers</developer_name>
+  <description>
+    <p>
+      TIFEA is a declarative, self-healing transactional installer and package manager for raw desktop application tarballs (.tar.gz, .tar.xz).
+    </p>
+    <p>
+      Key features include atomic execution ledger with LIFO rollback, automated Electron sandbox confinement (AppArmor, setuid, or no-sandbox), icon and metadata extraction from ASAR bundles, Desktop entry registration, and xdg-mime URL handler binding.
+    </p>
+  </description>
+  <provides>
+    <binary>tifea</binary>
+  </provides>
+  <releases>
+    <release version="1.0.0" date="2026-08-08"/>
+  </releases>
+</component>

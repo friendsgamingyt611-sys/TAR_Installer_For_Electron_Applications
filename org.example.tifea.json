@@ -1,0 +1,32 @@
+{
+    "app-id": "org.example.tifea",
+    "runtime": "org.freedesktop.Platform",
+    "runtime-version": "23.08",
+    "sdk": "org.freedesktop.Sdk",
+    "command": "tifea",
+    "finish-args": [
+        "--share=ipc",
+        "--socket=fallback-x11",
+        "--socket=wayland",
+        "--filesystem=host"
+    ],
+    "modules": [
+        {
+            "name": "tifea",
+            "buildsystem": "simple",
+            "build-commands": [
+                "python3 -m pip install --no-build-isolation --no-deps --prefix=/app .",
+                "install -D -m 0755 bin/tifea /app/bin/tifea",
+                "install -D -m 0644 data/man/tifea.1 /app/share/man/man1/tifea.1",
+                "install -D -m 0644 data/completions/tifea.bash /app/share/bash-completion/completions/tifea",
+                "install -D -m 0644 data/metainfo/org.example.tifea.metainfo.xml /app/share/metainfo/org.example.tifea.metainfo.xml"
+            ],
+            "sources": [
+                {
+                    "type": "dir",
+                    "path": "."
+                }
+            ]
+        }
+    ]
+}
